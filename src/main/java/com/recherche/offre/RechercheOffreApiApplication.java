@@ -1,4 +1,4 @@
-package com.recherche.offre.recherche_offre_api;
+package com.recherche.offre;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
