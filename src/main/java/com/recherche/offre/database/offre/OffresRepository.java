@@ -1,4 +1,4 @@
-package com.recherche.offre.db.offres;
+package com.recherche.offre.database.offre;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

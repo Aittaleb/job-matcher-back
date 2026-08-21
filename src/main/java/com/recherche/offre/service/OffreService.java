@@ -1,6 +1,6 @@
 package com.recherche.offre.service;
 
-import com.recherche.offre.db.offres.OffresRepository;
+import com.recherche.offre.database.offre.OffresRepository;
 import com.recherche.offre.dto.OffreDto;
 import com.recherche.offre.mappers.OffresMapper;
 import lombok.RequiredArgsConstructor;

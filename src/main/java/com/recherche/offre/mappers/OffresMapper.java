@@ -1,6 +1,6 @@
 package com.recherche.offre.mappers;
 
-import com.recherche.offre.db.offres.OffresEntity;
+import com.recherche.offre.database.offre.OffresEntity;
 import com.recherche.offre.dto.OffreDto;
 import org.mapstruct.Mapper;
 
