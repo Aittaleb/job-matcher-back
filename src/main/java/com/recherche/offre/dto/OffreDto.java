@@ -8,5 +8,5 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class OffreDto implements Serializable {
-    private String information;
+    private String description;
 }
