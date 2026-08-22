@@ -1,21 +1,23 @@
 package com.recherche.offre.service;
 
-import com.recherche.offre.database.offre.OffresRepository;
-import com.recherche.offre.dto.OffreDto;
-import com.recherche.offre.mappers.OffresMapper;
+import com.recherche.offre.client.FranceTravailOffresEmploiClient;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OffreService {
+    private final FranceTravailAuthService franceTravailAuthService;
+    private final FranceTravailOffresEmploiClient franceTravailClient;
 
-    private final OffresRepository repository;
-    private final OffresMapper mapper;
 
-    public List<OffreDto> trouverListOffreParQuery(final String query) {
-        return mapper.toOffreDtos(repository.findAllByDescriptionContains(query));
+    public String fetchOffers() {
+        try {
+            return franceTravailClient.rechercherOffres();
+        } catch (FeignException.Unauthorized exception) {
+            franceTravailAuthService.invalidateToken();
+            return franceTravailClient.rechercherOffres();
+        }
     }
 }
