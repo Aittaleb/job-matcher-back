@@ -36,7 +36,7 @@ public class SavedOfferEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OFFER_ID", nullable = false)
-    private OffresEntity offer;
+    private OffreSauvegardeeEntity offer;
 
     @Column(name = "CREATED_AT", nullable = false)
     private LocalDateTime createdAt;
