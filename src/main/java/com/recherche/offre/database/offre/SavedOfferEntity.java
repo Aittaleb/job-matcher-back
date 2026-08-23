@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 @SequenceGenerator(name = "SSAVEDOFFER001", sequenceName = "SSAVEDOFFER001", allocationSize = 1)
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 public class SavedOfferEntity {
 
@@ -34,9 +36,8 @@ public class SavedOfferEntity {
     @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OFFER_ID", nullable = false)
-    private OffreSauvegardeeEntity offer;
+    private String offerId;
 
     @Column(name = "CREATED_AT", nullable = false)
     private LocalDateTime createdAt;

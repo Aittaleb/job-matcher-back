@@ -24,17 +24,20 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "FIRST_NAME", nullable = false)
-    private String firstName;
+    private String prenom;
 
     @Column(name = "LAST_NAME", nullable = false)
-    private String lastName;
+    private String nom;
 
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
     @Column(name = "LOCATION", nullable = false)
-    private String location;
+    private String localisation;
+
+    @Column(name = "ZIP_CODE", nullable = false)
+    private String codePostal;
 
     @Column(name = "YEARS_EXPERIENCE", nullable = false)
-    private Integer yearsExperience;
+    private Integer anneeExperience;
 }

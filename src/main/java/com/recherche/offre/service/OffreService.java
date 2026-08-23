@@ -1,6 +1,9 @@
 package com.recherche.offre.service;
 
 import com.recherche.offre.client.FranceTravailOffresEmploiClient;
+import com.recherche.offre.database.offre.SavedOfferEntity;
+import com.recherche.offre.database.offre.SavedOfferRepository;
+import com.recherche.offre.database.user.UserRepository;
 import com.recherche.offre.dto.RechercheOffreDetailsDto;
 import com.recherche.offre.dto.RechercheOffreDto;
 import com.recherche.offre.mappers.OffresMapper;
@@ -15,6 +18,8 @@ import java.util.List;
 public class OffreService {
     private final FranceTravailAuthService franceTravailAuthService;
     private final FranceTravailOffresEmploiClient franceTravailClient;
+    private final SavedOfferRepository savedOfferRepository;
+    private final UserRepository userRepository;
     private final OffresMapper offresMapper;
 
     public List<RechercheOffreDto> fetchOffers() {
@@ -33,5 +38,17 @@ public class OffreService {
             franceTravailAuthService.invalidateToken();
             return offresMapper.toOffreDetailsDto(franceTravailClient.rechercherOffreParId(id));
         }
+    }
+
+    public Long sauvegarderOffre(final String offerId, final Long userId) {
+        return savedOfferRepository.save(
+                new SavedOfferEntity()
+                        .setOfferId(offerId)
+                        .setUser(userRepository.findById(userId).orElse(null))
+        ).getId();
+    }
+
+    public void supprimerOffre(final Long idTechnique, final Long userId) {
+        savedOfferRepository.deleteByIdAndUser_Id(idTechnique, userId);
     }
 }

@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class RechercheOffreDto {
 
-    private String identifiantOffre;
+    private Long id;
+    private String identifiantFt;
     private String intituleOffre;
     private String lieuTravail;
     private String codePostal;

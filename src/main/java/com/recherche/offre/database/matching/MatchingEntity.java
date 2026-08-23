@@ -1,7 +1,7 @@
 package com.recherche.offre.database.matching;
 
+import com.recherche.offre.database.offre.SavedOfferEntity;
 import com.recherche.offre.database.user.UserEntity;
-import com.recherche.offre.database.offre.OffreSauvegardeeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,7 +38,7 @@ public class MatchingEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OFFER_ID", nullable = false)
-    private OffreSauvegardeeEntity offer;
+    private SavedOfferEntity offer;
 
     @Column(name = "SCORE", nullable = false, precision = 5, scale = 2)
     private BigDecimal score;

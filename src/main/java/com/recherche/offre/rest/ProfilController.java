@@ -1,21 +1,24 @@
 package com.recherche.offre.rest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.recherche.offre.dto.ProfilDto;
+import com.recherche.offre.service.ProfilService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/profil")
+@RequiredArgsConstructor
 public class ProfilController {
 
-    @GetMapping("/")
-    public String getProfil() {
-        return "Profil information";
+    private final ProfilService profilService;
+
+    @GetMapping("/{userId}")
+    public ProfilDto getProfil(@PathVariable final Long userId) {
+        return profilService.getInformationsProfil(userId);
     }
 
-    @PutMapping("/")
-    public String updateProfil() {
-        return "Profil updated";
+    @PutMapping("/{userId}")
+    public String updateProfil(@PathVariable("userId") final Long userId, @RequestBody final ProfilDto profilDto) {
+        return profilService.updateProfil(userId, profilDto);
     }
 }

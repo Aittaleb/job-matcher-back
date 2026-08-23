@@ -1,6 +1,5 @@
 package com.recherche.offre.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +21,8 @@ public class FranceTravailOffreDto implements Serializable {
     private String romeLibelle;
     private String typeContrat;
     private List<CompetenceDto> competences;
+    private String experienceLibelle;
+    private String dureeTravailLibelle;
     private SalaireDto salaire;
 
 }
