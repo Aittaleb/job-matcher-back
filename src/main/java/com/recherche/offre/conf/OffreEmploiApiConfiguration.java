@@ -20,4 +20,7 @@ public class OffreEmploiApiConfiguration {
     @Value("${offre-emploi.api.scope}")
     private String scope;
 
+    @Value("${offre-emploi.api.auth-cache-ttl-seconds:240}")
+    private long authCacheTtlSeconds;
+
 }

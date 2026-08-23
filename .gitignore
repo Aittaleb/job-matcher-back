@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+tools
+setup-vault.bat
+
 ### STS ###
 .apt_generated
 .classpath

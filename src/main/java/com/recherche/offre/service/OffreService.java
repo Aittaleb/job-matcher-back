@@ -15,7 +15,7 @@ public class OffreService {
     public String fetchOffers() {
         try {
             return franceTravailClient.rechercherOffres();
-        } catch (FeignException.Unauthorized exception) {
+        } catch (final FeignException.Unauthorized exception) {
             franceTravailAuthService.invalidateToken();
             return franceTravailClient.rechercherOffres();
         }
