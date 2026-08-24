@@ -9,6 +9,7 @@ import com.recherche.offre.database.userskill.UserSkillRepository;
 import com.recherche.offre.dto.ProfilDto;
 import com.recherche.offre.dto.SkillDto;
 import com.recherche.offre.mappers.ProfilMapper;
+import com.recherche.offre.mappers.SkillMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -31,6 +32,7 @@ public class ProfilService {
     private final UserSkillRepository userSkillRepository;
     private final UserRepository userRepository;
     private final SkillRepository skillRepository;
+    private final SkillMapper skillMapper;
 
     public ProfilDto getInformationsProfil(final Long userId) {
         final UserEntity userEntity = userRepository.findById(userId)
@@ -69,13 +71,13 @@ public class ProfilService {
         final Map<String, SkillDto> competencesSouhaiteesParNom = new LinkedHashMap<>();
 
         for (final SkillDto competence : competences) {
-            if (competence == null || (competence.getId() == null && (competence.getName() == null || competence.getName().isBlank()))) {
+            if (competence == null || (competence.getId() == null && (competence.getCode() == null || competence.getCode().isBlank()))) {
                 continue;
             }
 
             final String cle = competence.getId() != null
                 ? "ID:" + competence.getId()
-                : "NAME:" + competence.getName().trim().toLowerCase();
+                : "NAME:" + competence.getCode().trim().toLowerCase();
             competencesSouhaiteesParNom.putIfAbsent(cle, competence);
         }
 
@@ -102,20 +104,21 @@ public class ProfilService {
     private SkillEntity trouverOuCreerCompetence(final SkillDto competence) {
         if (competence.getId() != null) {
             return skillRepository.findById(competence.getId())
-                .orElseGet(() -> trouverOuCreerCompetenceParNom(competence.getName()));
+                .orElseGet(() -> trouverOuCreerCompetenceParCode(competence));
         }
 
-        return trouverOuCreerCompetenceParNom(competence.getName());
+        return trouverOuCreerCompetenceParCode(competence);
     }
 
-    private SkillEntity trouverOuCreerCompetenceParNom(final String nomCompetence) {
-        if (nomCompetence == null || nomCompetence.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le nom de compétence est obligatoire");
+    private SkillEntity trouverOuCreerCompetenceParCode(final SkillDto competence) {
+        final String codeCompetence = competence.getCode();
+        if (codeCompetence == null || codeCompetence.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le code de compétence est obligatoire");
         }
 
-        final String nomNormalise = nomCompetence.trim();
-        return skillRepository.findByNameIgnoreCase(nomNormalise)
-            .orElseGet(() -> skillRepository.save(new SkillEntity().setName(nomNormalise)));
+        final String codeNormalise = codeCompetence.trim();
+        return skillRepository.findByCode(codeNormalise)
+            .orElseGet(() -> skillRepository.save(skillMapper.toSkillEntity(competence)));
     }
 
 }

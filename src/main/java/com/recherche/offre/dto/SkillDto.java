@@ -10,5 +10,6 @@ import java.io.Serializable;
 public class SkillDto implements Serializable {
 
     private Long id;
-    private String name;
+    private String code;
+    private String libelle;
 }

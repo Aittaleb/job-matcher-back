@@ -25,6 +25,10 @@ public class SkillEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SSKILL001")
     private Long id;
 
-    @Column(name = "NAME", nullable = false, unique = true)
-    private String name;
+    @Column(name = "LIBELLE", nullable = false, unique = true)
+    private String libelle;
+
+    @Column(name = "CODE", nullable = false, unique = true)
+    private String code;
+
 }
