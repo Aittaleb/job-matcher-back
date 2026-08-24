@@ -21,12 +21,21 @@ public class FranceTravailAuthService {
     private final AuthClient authClient;
     private final OffreEmploiApiConfiguration offreEmploiApiConfiguration;
 
-    @Cacheable(cacheNames = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE, key = "'bearer'")
+    @Cacheable(
+        cacheNames = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE,
+        key = "'bearer'",
+        cacheManager = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE_MANAGER
+    )
     public String getBearerToken() {
         return BEARER_PREFIX + requestCredentials().getAccessToken();
     }
 
-    @CacheEvict(cacheNames = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE, key = "'bearer'", beforeInvocation = true)
+    @CacheEvict(
+        cacheNames = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE,
+        key = "'bearer'",
+        beforeInvocation = true,
+        cacheManager = AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE_MANAGER
+    )
     public void invalidateToken() {
         // Methode intentionnellement vide: l'annotation gere l'invalidation du cache.
     }

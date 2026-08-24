@@ -23,4 +23,7 @@ public class OffreEmploiApiConfiguration {
     @Value("${offre-emploi.api.auth-cache-ttl-seconds:240}")
     private long authCacheTtlSeconds;
 
+    @Value("${offre-emploi.api.rome-cache-ttl-hours:24}")
+    private long romeCacheTtlHours;
+
 }
