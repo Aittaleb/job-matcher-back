@@ -12,4 +12,5 @@ public interface SkillMapper {
 
     @InheritInverseConfiguration
     SkillDto toSkillDto(SkillEntity skillEntity);
+
 }

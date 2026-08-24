@@ -24,6 +24,7 @@ public interface OffresMapper {
     @Mapping(target = "description", source = "franceTravailOffre.description")
     @Mapping(target = "typeContratLibelle", source = "franceTravailOffre.typeContrat")
     @Mapping(target = "dureeTravail", source = "franceTravailOffre.dureeTravailLibelle")
+    @Mapping(target = "competences", source = "franceTravailOffre.competences")
     RechercheOffreDetailsDto toOffreDetailsDto(FranceTravailOffreDto franceTravailOffre);
 
     List<RechercheOffreDto> toOffreDtoList(List<FranceTravailOffreDto> franceTravailOffreDtos);

@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,5 +17,6 @@ public class RechercheOffreDetailsDto extends RechercheOffreDto implements Seria
     private String natureContrat;
     private String experienceLibelle;
     private String dureeTravail;
+    private List<SkillDto> competences;
 
 }
