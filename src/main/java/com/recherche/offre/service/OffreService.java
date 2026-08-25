@@ -44,7 +44,7 @@ public class OffreService {
         return savedOfferRepository.save(
                 new SavedOfferEntity()
                         .setOfferId(offerId)
-                        .setUser(userRepository.findById(userId).orElse(null))
+                        .setUser(userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé avec l'ID : " + userId)))
         ).getId();
     }
 
