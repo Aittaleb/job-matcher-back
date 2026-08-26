@@ -17,6 +17,6 @@ public class MatchingController {
 
      @GetMapping("/profil/{profilId}/offre/{offreId}/matching")
      public RapportCorrespondanceDto getMatchingOffers(@PathVariable final Long profilId, @PathVariable final String offreId) {
-         return matchingService.calculMatchingSelonCompetences(profilId, offreId);
+         return matchingService.calculerRapportCorrespondanceParIdOffreEtIdUtilisateur(profilId, offreId);
      }
 }

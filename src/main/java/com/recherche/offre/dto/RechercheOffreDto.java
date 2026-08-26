@@ -2,6 +2,8 @@ package com.recherche.offre.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RechercheOffreDto {
 
@@ -11,5 +13,6 @@ public class RechercheOffreDto {
     private String lieuTravail;
     private String codePostal;
     private String salaire;
+    private List<SkillDto> competences;
 
 }

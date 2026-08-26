@@ -18,13 +18,13 @@ public interface OffresMapper {
     @Mapping(target = "lieuTravail", source = "franceTravailOffre.lieuTravail.libelle")
     @Mapping(target = "codePostal", source = "franceTravailOffre.lieuTravail.codePostal")
     @Mapping(target = "salaire", source = "franceTravailOffre.salaire.libelle")
+    @Mapping(target = "competences", source = "franceTravailOffre.competences")
     RechercheOffreDto toOffreDto(FranceTravailOffreDto franceTravailOffre);
 
     @InheritConfiguration(name = "toOffreDto")
     @Mapping(target = "description", source = "franceTravailOffre.description")
     @Mapping(target = "typeContratLibelle", source = "franceTravailOffre.typeContrat")
     @Mapping(target = "dureeTravail", source = "franceTravailOffre.dureeTravailLibelle")
-    @Mapping(target = "competences", source = "franceTravailOffre.competences")
     RechercheOffreDetailsDto toOffreDetailsDto(FranceTravailOffreDto franceTravailOffre);
 
     List<RechercheOffreDto> toOffreDtoList(List<FranceTravailOffreDto> franceTravailOffreDtos);

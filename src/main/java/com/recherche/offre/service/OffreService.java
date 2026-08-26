@@ -40,6 +40,13 @@ public class OffreService {
         }
     }
 
+    public List<RechercheOffreDetailsDto> fetchFavoriteOffers(final Long userId) {
+        return savedOfferRepository.findByUser_Id(userId)
+                .stream()
+                .map(savedOffer -> fetchOfferDetails(savedOffer.getOfferId()))
+                .toList();
+    }
+
     public Long sauvegarderOffre(final String offerId, final Long userId) {
         return savedOfferRepository.save(
                 new SavedOfferEntity()
