@@ -41,11 +41,11 @@ public class MatchingService {
         final List<SkillDto> offreCompetences = offre.getCompetences();
         final List<SkillDto> competencesTrouvees = profilCompetences.stream()
                 .filter(profilCompetence -> offreCompetences.stream()
-                        .anyMatch(offreCompetence -> offreCompetence.getCode().equals(profilCompetence.getCode())))
+                        .anyMatch(offreCompetence -> profilCompetence.getCode().equals(offreCompetence.getCode())))
                 .toList();
         final List<SkillDto> competencesManquantes = offreCompetences.stream()
                 .filter(offreCompetence -> profilCompetences.stream()
-                        .noneMatch(profilCompetence -> offreCompetence.getCode().equals(profilCompetence.getCode())))
+                        .noneMatch(profilCompetence -> profilCompetence.getCode().equals(offreCompetence.getCode())))
                 .toList();
 
         final int score = competencesTrouvees.size() * 100 / (competencesTrouvees.size() + competencesManquantes.size());

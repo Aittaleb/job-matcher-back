@@ -10,6 +10,8 @@ import com.recherche.offre.mappers.OffresMapper;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -40,14 +42,21 @@ public class OffreService {
         }
     }
 
-    public List<RechercheOffreDetailsDto> fetchFavoriteOffers(final Long userId) {
+    public List<RechercheOffreDto> fetchFavoriteOffers(final Long userId) {
         return savedOfferRepository.findByUser_Id(userId)
                 .stream()
-                .map(savedOffer -> fetchOfferDetails(savedOffer.getOfferId()))
+                .map(savedOffer -> fetchOfferDetails(savedOffer.getOfferId()).setId(savedOffer.getId()))
                 .toList();
     }
 
     public Long sauvegarderOffre(final String offerId, final Long userId) {
+        final List<SavedOfferEntity> alreadySavedOfferList = savedOfferRepository.findByUser_Id(userId)
+                .stream()
+                .filter(savedOffer -> savedOffer.getOfferId().equals(offerId))
+                .toList();
+        if (!CollectionUtils.isEmpty(alreadySavedOfferList)) {
+            return alreadySavedOfferList.get(0).getId();
+        }
         return savedOfferRepository.save(
                 new SavedOfferEntity()
                         .setOfferId(offerId)
@@ -55,6 +64,7 @@ public class OffreService {
         ).getId();
     }
 
+    @Transactional
     public void supprimerOffre(final Long idTechnique, final Long userId) {
         savedOfferRepository.deleteByIdAndUser_Id(idTechnique, userId);
     }

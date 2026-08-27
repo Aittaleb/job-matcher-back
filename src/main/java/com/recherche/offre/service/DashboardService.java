@@ -5,12 +5,16 @@ import com.recherche.offre.dto.RapportCorrespondanceDto;
 import com.recherche.offre.dto.RechercheOffreDto;
 import com.recherche.offre.dto.SkillDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 @Service
 @RequiredArgsConstructor
@@ -34,11 +38,12 @@ public class DashboardService {
 
         // top 3 des compétences les plus réccurentes à développer
         final List<SkillDto> topCompetences = listeCompetencesManquantes.stream()
-                .collect(java.util.stream.Collectors.groupingBy(SkillDto::getCode, java.util.stream.Collectors.counting()))
+                .filter(skillDto -> StringUtils.isNotBlank(skillDto.getCode()))
+                .collect(groupingBy(SkillDto::getCode, counting()))
                 .entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .limit(3)
-                .map(e -> listeCompetencesManquantes.stream().filter(s -> s.getCode().equals(e.getKey())).findFirst().orElse(null))
+                .map(e -> listeCompetencesManquantes.stream().filter(s -> StringUtils.isNotBlank(s.getCode()) && s.getCode().equals(e.getKey())).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .toList();
 
