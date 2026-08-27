@@ -17,8 +17,8 @@ public class OffreController {
     private final OffreService offreService;
 
     @GetMapping(value = "/offres")
-    public List<RechercheOffreDto> rechercherOffres() {
-        return offreService.fetchOffers();
+    public List<RechercheOffreDto> rechercherOffresParMotCle(@RequestParam(value = "query") final String query) {
+        return offreService.fetchOffersByKeyword(query);
     }
 
     @GetMapping(value = "/offres/{id}")

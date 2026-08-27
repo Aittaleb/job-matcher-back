@@ -33,6 +33,21 @@ public class OffreService {
         }
     }
 
+    public List<RechercheOffreDto> fetchOffersByKeyword(final String keyword) {
+        try {
+            return offresMapper.toOffreDtoList(franceTravailClient.rechercherOffres().resultats().stream()
+                    .filter(offre -> offre.getIntitule().toLowerCase().contains(keyword.toLowerCase()) ||
+                            offre.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                    .toList());
+        } catch (final FeignException.Unauthorized exception) {
+            franceTravailAuthService.invalidateToken();
+            return offresMapper.toOffreDtoList(franceTravailClient.rechercherOffres().resultats().stream()
+                    .filter(offre -> offre.getIntitule().toLowerCase().contains(keyword.toLowerCase()) ||
+                            offre.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                    .toList());
+        }
+    }
+
     public RechercheOffreDetailsDto fetchOfferDetails(final String id) {
         try {
             return offresMapper.toOffreDetailsDto(franceTravailClient.rechercherOffreParId(id));
