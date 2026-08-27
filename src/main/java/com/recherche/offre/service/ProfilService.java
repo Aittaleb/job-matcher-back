@@ -42,7 +42,7 @@ public class ProfilService {
     }
 
     @Transactional
-    public String updateProfil(final Long userId, final ProfilDto profilDto) {
+    public ProfilDto updateProfil(final Long userId, final ProfilDto profilDto) {
         final UserEntity userEntity = userRepository.findById(userId)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
 
@@ -56,7 +56,7 @@ public class ProfilService {
 
         synchroniserCompetences(userEntity, profilDto.getCompetences());
 
-        return "Profil mis à jour avec succès";
+        return getInformationsProfil(userId);
     }
 
     private void synchroniserCompetences(final UserEntity userEntity, final List<SkillDto> competences) {

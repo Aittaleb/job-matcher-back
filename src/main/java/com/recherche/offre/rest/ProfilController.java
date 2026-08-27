@@ -18,7 +18,7 @@ public class ProfilController {
     }
 
     @PutMapping("/{userId}")
-    public String updateProfil(@PathVariable("userId") final Long userId, @RequestBody final ProfilDto profilDto) {
+    public ProfilDto updateProfil(@PathVariable("userId") final Long userId, @RequestBody final ProfilDto profilDto) {
         return profilService.updateProfil(userId, profilDto);
     }
 }
