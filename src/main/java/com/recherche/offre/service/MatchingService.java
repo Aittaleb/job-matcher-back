@@ -19,17 +19,15 @@ public class MatchingService {
     public RapportCorrespondanceDto calculerRapportCorrespondanceParIdOffreEtIdUtilisateur(final Long profilId, final String offreId) {
         var profil = profilService.getInformationsProfil(profilId);
         var offre = offreService.fetchOfferDetails(offreId);
-
         return getRapportCorrespondanceDto(offre, profil);
     }
 
     public RapportCorrespondanceDto calculerRapportCorrespondancePourUneOffreDonneeEtIdUtilisateur(final Long profilId, final RechercheOffreDto offre) {
         var profil = profilService.getInformationsProfil(profilId);
-
         return getRapportCorrespondanceDto(offre, profil);
     }
 
-    private RapportCorrespondanceDto getRapportCorrespondanceDto(RechercheOffreDto offre, ProfilDto profil) {
+    private RapportCorrespondanceDto getRapportCorrespondanceDto(final RechercheOffreDto offre, final ProfilDto profil) {
         if (profil == null || offre == null || CollectionUtils.isEmpty(profil.getCompetences()) || CollectionUtils.isEmpty(offre.getCompetences())) {
             return new RapportCorrespondanceDto()
                     .setScore(0)
