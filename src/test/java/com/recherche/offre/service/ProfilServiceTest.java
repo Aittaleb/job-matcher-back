@@ -5,6 +5,7 @@ import com.recherche.offre.database.skill.SkillRepository;
 import com.recherche.offre.database.user.UserEntity;
 import com.recherche.offre.database.user.UserRepository;
 import com.recherche.offre.database.userskill.UserSkillRepository;
+import com.recherche.offre.dto.CompetenceRomeDto;
 import com.recherche.offre.dto.ProfilDto;
 import com.recherche.offre.dto.SkillDto;
 import com.recherche.offre.mappers.ProfilMapper;
@@ -49,6 +50,9 @@ class ProfilServiceTest {
     @Mock
     private SkillMapper skillMapper;
 
+    @Mock
+    private RomeService romeService;
+
     @InjectMocks
     private ProfilService profilService;
 
@@ -68,7 +72,7 @@ class ProfilServiceTest {
         verify(userRepository).findById(1L);
         verify(userSkillRepository).findSkillsByUserId(1L);
         verify(profilMapper).toProfilDto(user, List.of(skill));
-        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper);
+        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper, romeService);
 
         assertNotNull(actual);
         assertEquals(expected, actual);
@@ -82,7 +86,7 @@ class ProfilServiceTest {
                 () -> profilService.getInformationsProfil(1L));
 
         verify(userRepository).findById(1L);
-        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper);
+        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper, romeService);
 
         assertEquals(HttpStatus.NOT_FOUND, ex.getStatusCode());
     }
@@ -104,15 +108,15 @@ class ProfilServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(userRepository.save(any(UserEntity.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(userSkillRepository.findSkillsByUserId(1L)).thenReturn(Collections.emptyList());
-        when(profilMapper.toProfilDto(any(UserEntity.class), any(List.class))).thenReturn(expected);
+        when(profilMapper.toProfilDto(any(UserEntity.class), any())).thenReturn(expected);
 
         final var actual = profilService.updateProfil(1L, input);
 
         verify(userRepository, times(2)).findById(1L);
         verify(userRepository).save(user);
         verify(userSkillRepository).findSkillsByUserId(1L);
-        verify(profilMapper).toProfilDto(any(UserEntity.class), any(List.class));
-        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper);
+        verify(profilMapper).toProfilDto(any(UserEntity.class), any());
+        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper, romeService);
 
         assertNotNull(actual);
         assertEquals(expected, actual);
@@ -133,17 +137,48 @@ class ProfilServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(userSkillRepository.findAllByIdUserId(1L)).thenReturn(Collections.emptyList());
         when(skillRepository.findById(999L)).thenReturn(Optional.empty());
+        when(romeService.chargerCachedRome()).thenReturn(List.of(buildRomeCompetence("java")));
 
         final ResponseStatusException ex = assertThrows(ResponseStatusException.class,
                 () -> profilService.updateProfil(1L, input));
 
         verify(userRepository).findById(1L);
         verify(userRepository).save(user);
+        verify(romeService).chargerCachedRome();
         verify(userSkillRepository).findAllByIdUserId(1L);
         verify(skillRepository).findById(999L);
-        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper);
+        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper, romeService);
 
         assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
+    }
+
+    @Test
+    void updateProfil_throwSiCompetenceHorsReferentielRome() {
+        final UserEntity user = new UserEntity();
+        user.setId(1L);
+        final ProfilDto input = new ProfilDto().setCompetences(List.of(new SkillDto().setCode("unknown-skill")));
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(userSkillRepository.findAllByIdUserId(1L)).thenReturn(Collections.emptyList());
+        when(romeService.chargerCachedRome()).thenReturn(List.of(buildRomeCompetence("java"), buildRomeCompetence("spring")));
+
+        final ResponseStatusException ex = assertThrows(ResponseStatusException.class,
+                () -> profilService.updateProfil(1L, input));
+
+        verify(userRepository).findById(1L);
+        verify(userRepository).save(user);
+        verify(romeService).chargerCachedRome();
+        verify(userSkillRepository).findAllByIdUserId(1L);
+        verifyNoMoreInteractions(userRepository, userSkillRepository, profilMapper, skillRepository, skillMapper, romeService);
+
+        assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
+        assertEquals("La competence 'unknown-skill' n'est pas reconnue dans le referentiel ROME", ex.getReason());
+    }
+
+    private CompetenceRomeDto buildRomeCompetence(final String code) {
+        final CompetenceRomeDto competenceRomeDto = new CompetenceRomeDto();
+        competenceRomeDto.setCode(code);
+        return competenceRomeDto;
     }
 }
 

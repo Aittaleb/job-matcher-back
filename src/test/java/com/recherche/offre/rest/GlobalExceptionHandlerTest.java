@@ -1,5 +1,6 @@
 package com.recherche.offre.rest;
 
+import com.recherche.offre.conf.GlobalExceptionHandler;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;

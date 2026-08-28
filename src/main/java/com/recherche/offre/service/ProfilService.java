@@ -6,6 +6,7 @@ import com.recherche.offre.database.user.UserEntity;
 import com.recherche.offre.database.user.UserRepository;
 import com.recherche.offre.database.userskill.UserSkillEntity;
 import com.recherche.offre.database.userskill.UserSkillRepository;
+import com.recherche.offre.dto.CompetenceRomeDto;
 import com.recherche.offre.dto.ProfilDto;
 import com.recherche.offre.dto.SkillDto;
 import com.recherche.offre.mappers.ProfilMapper;
@@ -33,6 +34,7 @@ public class ProfilService {
     private final UserRepository userRepository;
     private final SkillRepository skillRepository;
     private final SkillMapper skillMapper;
+    private final RomeService romeService;
 
     public ProfilDto getInformationsProfil(final Long userId) {
         final UserEntity userEntity = userRepository.findById(userId)
@@ -64,6 +66,8 @@ public class ProfilService {
             return;
         }
 
+        final Set<String> codesReferentiel = chargerCodesReferentiel();
+
         final List<UserSkillEntity> competencesActuelles = userSkillRepository.findAllByIdUserId(userEntity.getId());
         final Set<Long> competencesActuellesIds = competencesActuelles.stream()
             .map(userSkillEntity -> userSkillEntity.getSkill().getId())
@@ -84,7 +88,7 @@ public class ProfilService {
         final Set<Long> competencesSouhaitees = new HashSet<>();
 
         for (final SkillDto competence : competencesSouhaiteesParNom.values()) {
-            final SkillEntity skillEntity = trouverOuCreerCompetence(competence);
+            final SkillEntity skillEntity = trouverOuCreerCompetence(competence, codesReferentiel);
             competencesSouhaitees.add(skillEntity.getId());
 
             if (competencesActuellesIds.add(skillEntity.getId())) {
@@ -101,24 +105,50 @@ public class ProfilService {
         }
     }
 
-    private SkillEntity trouverOuCreerCompetence(final SkillDto competence) {
+    private SkillEntity trouverOuCreerCompetence(final SkillDto competence, final Set<String> codesReferentiel) {
         if (competence.getId() != null) {
             return skillRepository.findById(competence.getId())
-                .orElseGet(() -> trouverOuCreerCompetenceParCode(competence));
+                .map(skillEntity -> {
+                    verifierCodeReferentiel(skillEntity.getCode(), codesReferentiel);
+                    return skillEntity;
+                })
+                .orElseGet(() -> trouverOuCreerCompetenceParCode(competence, codesReferentiel));
         }
 
-        return trouverOuCreerCompetenceParCode(competence);
+        return trouverOuCreerCompetenceParCode(competence, codesReferentiel);
     }
 
-    private SkillEntity trouverOuCreerCompetenceParCode(final SkillDto competence) {
+    private SkillEntity trouverOuCreerCompetenceParCode(final SkillDto competence, final Set<String> codesReferentiel) {
         final String codeCompetence = competence.getCode();
-        if (codeCompetence == null || codeCompetence.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le code de compétence est obligatoire");
-        }
-
-        final String codeNormalise = codeCompetence.trim();
+        final String codeNormalise = verifierCodeReferentiel(codeCompetence, codesReferentiel);
         return skillRepository.findByCode(codeNormalise)
             .orElseGet(() -> skillRepository.save(skillMapper.toSkillEntity(competence)));
+    }
+
+    private Set<String> chargerCodesReferentiel() {
+        return romeService.chargerCachedRome().stream()
+            .map(CompetenceRomeDto::getCode)
+            .filter(code -> code != null && !code.isBlank())
+            .map(this::normaliserCode)
+            .collect(Collectors.toSet());
+    }
+
+    private String verifierCodeReferentiel(final String codeCompetence, final Set<String> codesReferentiel) {
+        if (codeCompetence == null || codeCompetence.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le code de competence est obligatoire");
+        }
+
+        final String codeNormalise = normaliserCode(codeCompetence);
+        if (!codesReferentiel.contains(codeNormalise)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "La competence '" + codeNormalise + "' n'est pas reconnue dans le referentiel ROME");
+        }
+
+        return codeNormalise;
+    }
+
+    private String normaliserCode(final String codeCompetence) {
+        return codeCompetence.trim().toLowerCase();
     }
 
 }

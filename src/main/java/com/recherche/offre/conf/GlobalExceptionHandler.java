@@ -1,4 +1,4 @@
-package com.recherche.offre.rest;
+package com.recherche.offre.conf;
 
 import com.recherche.offre.dto.ApiErrorDto;
 import jakarta.servlet.http.HttpServletRequest;
