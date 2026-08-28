@@ -14,8 +14,6 @@ public interface UserSkillRepository extends JpaRepository<UserSkillEntity, User
     @Query("select us.skill from UserSkillEntity us where us.user.id = :userId")
     List<SkillEntity> findSkillsByUserId(@Param("userId") Long userId);
 
-    void deleteByUser_IdAndSkill_Id(Long userId, Long skillId);
-
     List<UserSkillEntity> findAllByIdUserId(Long userId);
 }
 
