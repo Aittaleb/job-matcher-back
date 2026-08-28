@@ -10,8 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -36,7 +35,7 @@ class FranceTravailAuthServiceTest {
         when(offreEmploiApiConfiguration.getClientId()).thenReturn("client-id");
         when(offreEmploiApiConfiguration.getClientSecret()).thenReturn("client-secret");
         when(offreEmploiApiConfiguration.getScope()).thenReturn("scope-value");
-        when(authClient.getCredentials(eq("/partenaire"), org.mockito.ArgumentMatchers.any())).thenReturn(credentials);
+        when(authClient.getCredentials(eq("/partenaire"), any())).thenReturn(credentials);
 
         final String actual = franceTravailAuthService.getBearerToken();
 
