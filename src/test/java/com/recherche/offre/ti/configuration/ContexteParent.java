@@ -7,10 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +19,6 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static com.recherche.offre.utils.TestUtils.readFile;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import(ContexteParent.TestRestTemplateConfiguration.class)
 public abstract class ContexteParent {
 
     protected static final String AUTH_TOKEN_PATH = "/connexion/oauth2/access_token";
@@ -105,16 +101,7 @@ public abstract class ContexteParent {
                 .willReturn(aResponse()
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                         .withStatus(HttpStatus.OK.value())
-                        .withBody(readFile("/fixtures/offre-details-response.json"))));
-    }
-
-    @TestConfiguration(proxyBeanMethods = false)
-    static class TestRestTemplateConfiguration {
-
-        @Bean
-        TestRestTemplate testRestTemplate() {
-            return new TestRestTemplate();
-        }
+                        .withBody(readFile("/fixtures/offre-details-response-"+identifiantOffre+".json"))));
     }
 
 }

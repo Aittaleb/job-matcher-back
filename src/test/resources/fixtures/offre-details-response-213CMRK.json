@@ -1,0 +1,102 @@
+{
+  "id": "213CMRK",
+  "intitule": "Serveur en extra H/F (H/F)",
+  "description": "L'hôtel Kyriad de Nuits Saint Georges recherche un Serveur ou une serveuse en contrat extra ou cdd saisonnier .\n\nVous serez chargé(e) : \n- D'accueillir les clients avec bienveillance,\n- De présenter et mettre en valeur les mets\n- De prendre les commandes,\n- De veiller à ce que vos clients soient satisfaits,\n- D' installer la salle pour accueillir les clients,\n- De remettre la salle en place après le service.\n\nL'Anglais est un plus",
+  "dateCreation": "2026-08-30T13:44:21.278Z",
+  "dateActualisation": "2026-08-30T13:44:21.661Z",
+  "lieuTravail": {
+    "libelle": "21 - NUITS ST GEORGES",
+    "latitude": 47.137905,
+    "longitude": 4.950229,
+    "codePostal": "21700",
+    "commune": "21464"
+  },
+  "romeCode": "G1803",
+  "romeLibelle": "Serveur / Serveuse en restauration",
+  "appellationlibelle": "Garçon / Serveuse de restaurant",
+  "entreprise": {
+    "nom": "KNSG",
+    "entrepriseAdaptee": false
+  },
+  "typeContrat": "SAI",
+  "typeContratLibelle": "Saisonnier - 1 Mois",
+  "natureContrat": "Contrat travail",
+  "experienceExige": "E",
+  "experienceLibelle": "6 Mois",
+  "langues": [
+    {
+      "libelle": "Anglais",
+      "exigence": "S"
+    }
+  ],
+  "competences": [
+    {
+      "code": "101901",
+      "libelle": "Accueillir le client et l'installer",
+      "exigence": "S"
+    },
+    {
+      "code": "300556",
+      "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts",
+      "exigence": "S"
+    },
+    {
+      "code": "117933",
+      "libelle": "Effectuer le service des plats à table",
+      "exigence": "S"
+    },
+    {
+      "code": "104324",
+      "libelle": "Prendre une commande client",
+      "exigence": "S"
+    },
+    {
+      "code": "117932",
+      "libelle": "Réaliser la mise en place de la salle et de l'office",
+      "exigence": "S"
+    }
+  ],
+  "salaire": {
+    "commentaire": "Selon expérience"
+  },
+  "dureeTravailLibelle": "Temps partiel - 12H/semaine\nTravail les week-ends et jours fériés",
+  "dureeTravailLibelleConverti": "Temps partiel",
+  "alternance": false,
+  "contact": {
+    "nom": "KNSG - Mme Amandine Rolet",
+    "coordonnees1": "Pour postuler, utiliser le lien suivant : https://candidat.francetravail.fr/offres/recherche/detail/213CMRK",
+    "courriel": "Pour postuler, utiliser le lien suivant : https://candidat.francetravail.fr/offres/recherche/detail/213CMRK"
+  },
+  "agence": {},
+  "nombrePostes": 1,
+  "deplacementCode": "1",
+  "deplacementLibelle": "Jamais",
+  "qualificationCode": "6",
+  "qualificationLibelle": "Employé qualifié",
+  "codeNAF": "55.10Z",
+  "secteurActivite": "55",
+  "secteurActiviteLibelle": "Hôtels et hébergement similaire",
+  "qualitesProfessionnelles": [
+    {
+      "libelle": "Avoir le sens du service",
+      "description": "Capacité à identifier (voire anticiper) les besoins des usagers, clients (internes et externes) et à apporter une réponse adaptée afin de les satisfaire."
+    },
+    {
+      "libelle": "Avoir l'esprit d'équipe",
+      "description": "Capacité à travailler et à se coordonner avec les autres au sein de l'entreprise pour réaliser les objectifs fixés."
+    }
+  ],
+  "trancheEffectifEtab": "6 à 9 salariés",
+  "origineOffre": {
+    "origine": "1",
+    "urlOrigine": "https://candidat.francetravail.fr/offres/recherche/detail/213CMRK"
+  },
+  "offresManqueCandidats": false,
+  "contexteTravail": {
+    "horaires": [
+      "Temps partiel - 12H/semaine\nTravail les week-ends et jours fériés"
+    ]
+  },
+  "entrepriseAdaptee": false,
+  "employeurHandiEngage": false
+}

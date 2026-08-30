@@ -1,0 +1,41 @@
+{
+  "anneeExperience": 6,
+  "codePostal": "13100",
+  "competences": [
+    {
+      "id": 1,
+      "code": "109870",
+      "libelle": "Java"
+    },
+    {
+      "id": 2,
+      "code": "113274",
+      "libelle": "Framework Spring"
+    },
+    {
+      "id": 3,
+      "code": "404167",
+      "libelle": "Gérer et maitriser des bases de données (SQL/NoSQL)"
+    },
+    {
+      "id": 4,
+      "code": "403031",
+      "libelle": "Docker"
+    },
+    {
+      "id": 5,
+      "code": "404054",
+      "libelle": "Maîtrise d'un outil de gestion de flux (Kafka, Flink…)"
+    },
+    {
+      "id": 6,
+      "code": "403870",
+      "libelle": "React.js"
+    }
+  ],
+  "email": "abdelhamid.ait-taleb@yahoo.fr",
+  "id": 1,
+  "localisation": "Aix-en-provence",
+  "nom": "AIT TALEB",
+  "prenom": "Abdelhamid"
+}

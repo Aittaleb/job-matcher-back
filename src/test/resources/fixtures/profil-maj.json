@@ -1,0 +1,21 @@
+{
+  "anneeExperience": 5,
+  "codePostal": "75000",
+  "competences": [
+    {
+      "id": 1000,
+      "code": "519057",
+      "libelle": "NouvelleCompetence"
+    },
+    {
+      "id": 1001,
+      "code": "519073",
+      "libelle": "NouvelleCompetence2"
+    }
+  ],
+  "email": "abdel@gmail.com",
+  "id": 1,
+  "localisation": "NouveauLieu",
+  "nom": "NouveauNom",
+  "prenom": "NouveauPrenom"
+}
