@@ -1,0 +1,407 @@
+[
+  {
+    "codePostal": "21700",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "300556",
+        "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMRK",
+    "intituleOffre": "Serveur en extra H/F (H/F)",
+    "lieuTravail": "21 - NUITS ST GEORGES",
+    "salaire": null
+  },
+  {
+    "codePostal": "83530",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "300556",
+        "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMPH",
+    "intituleOffre": "Serveur / Serveuse (H/F)",
+    "lieuTravail": "83 - ST RAPHAEL",
+    "salaire": null
+  },
+  {
+    "codePostal": "59800",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "300556",
+        "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMNP",
+    "intituleOffre": "Serveur (H/F)",
+    "lieuTravail": "59 - LILLE",
+    "salaire": "Horaire de 12.31 Euros sur 12.0 mois"
+  },
+  {
+    "codePostal": "66000",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMNJ",
+    "intituleOffre": "Serveur / Serveuse de bar-brasserie (H/F)",
+    "lieuTravail": "66 - PERPIGNAN",
+    "salaire": null
+  },
+  {
+    "codePostal": "42000",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "124961",
+        "libelle": "Préparer des boissons chaudes ou froides"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMMR",
+    "intituleOffre": "Serveur / Serveuse - Bar Tabac (H/F)",
+    "lieuTravail": "42 - ST ETIENNE",
+    "salaire": "Mensuel de 1800.0 Euros à 2200.0 Euros sur 12.0 mois"
+  },
+  {
+    "codePostal": "32330",
+    "competences": [
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "300556",
+        "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMDC",
+    "intituleOffre": "Serveur (H/F)",
+    "lieuTravail": "32 - GONDRIN",
+    "salaire": "Mensuel de 1950.0 Euros sur 12.0 mois"
+  },
+  {
+    "codePostal": "02100",
+    "competences": [
+      {
+        "id": null,
+        "code": "480464",
+        "libelle": "Communication avec la cuisine"
+      },
+      {
+        "id": null,
+        "code": "480467",
+        "libelle": "Connaissance des menus spéciaux (végétarien, sans gluten)"
+      },
+      {
+        "id": null,
+        "code": "477901",
+        "libelle": "Gestion des plaintes et des requêtes clients"
+      },
+      {
+        "id": null,
+        "code": "104333",
+        "libelle": "Lecture de plan de salle"
+      },
+      {
+        "id": null,
+        "code": "480460",
+        "libelle": "Nettoyage des espaces de restauration"
+      },
+      {
+        "id": null,
+        "code": "101449",
+        "libelle": "Réglementation sécurité incendie"
+      },
+      {
+        "id": null,
+        "code": "100359",
+        "libelle": "Règles d'hygiène et de sécurité alimentaire"
+      },
+      {
+        "id": null,
+        "code": "104336",
+        "libelle": "Techniques de dressage de table"
+      },
+      {
+        "id": null,
+        "code": "480468",
+        "libelle": "Techniques de paiement et de facturation"
+      },
+      {
+        "id": null,
+        "code": "104313",
+        "libelle": "Techniques de port de plateaux et plats"
+      },
+      {
+        "id": null,
+        "code": "104316",
+        "libelle": "Techniques de service à l'assiette"
+      },
+      {
+        "id": null,
+        "code": "104325",
+        "libelle": "Techniques du service en salle"
+      },
+      {
+        "id": null,
+        "code": "119040",
+        "libelle": "Utilisation de caisse informatisée"
+      },
+      {
+        "id": null,
+        "code": "480458",
+        "libelle": "Vins"
+      },
+      {
+        "id": null,
+        "code": "101901",
+        "libelle": "Accueillir le client et l'installer"
+      },
+      {
+        "id": null,
+        "code": "300556",
+        "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+      },
+      {
+        "id": null,
+        "code": "117933",
+        "libelle": "Effectuer le service des plats à table"
+      },
+      {
+        "id": null,
+        "code": "104324",
+        "libelle": "Prendre une commande client"
+      },
+      {
+        "id": null,
+        "code": "117932",
+        "libelle": "Réaliser la mise en place de la salle et de l'office"
+      },
+      {
+        "id": null,
+        "code": "300282",
+        "libelle": "Entretenir, nettoyer un espace, un lieu, un local"
+      },
+      {
+        "id": null,
+        "code": "104263",
+        "libelle": "Essuyer et ranger la vaisselle, la verrerie, les ustensiles de cuisine"
+      },
+      {
+        "id": null,
+        "code": "485640",
+        "libelle": "Evaluer la satisfaction des clients et recueillir les feedbacks"
+      },
+      {
+        "id": null,
+        "code": "403015",
+        "libelle": "Garantir la satisfaction du client"
+      },
+      {
+        "id": null,
+        "code": "485635",
+        "libelle": "Gérer les situations d'urgence ou les plaintes des clients"
+      },
+      {
+        "id": null,
+        "code": "484953",
+        "libelle": "Maintenir une communication claire et professionnelle"
+      },
+      {
+        "id": null,
+        "code": "483320",
+        "libelle": "Maintenir un environnement de travail propre et organisé"
+      },
+      {
+        "id": null,
+        "code": "485641",
+        "libelle": "Participer à la gestion des stocks de nourriture et de boissons"
+      },
+      {
+        "id": null,
+        "code": "124961",
+        "libelle": "Préparer des boissons chaudes ou froides"
+      },
+      {
+        "id": null,
+        "code": "300303",
+        "libelle": "Procéder à l'encaissement"
+      },
+      {
+        "id": null,
+        "code": "400722",
+        "libelle": "Proposer des produits additionnels"
+      },
+      {
+        "id": null,
+        "code": "123660",
+        "libelle": "Ranger des produits ou marchandises selon leurs dates de validité et les conditions de conservation"
+      },
+      {
+        "id": null,
+        "code": "300263",
+        "libelle": "Réceptionner des produits, des matières premières, vérifier la conformité d'une livraison"
+      },
+      {
+        "id": null,
+        "code": "400151",
+        "libelle": "Rendre compte de son action, de risques ou d'anomalies au responsable"
+      },
+      {
+        "id": null,
+        "code": "400594",
+        "libelle": "Renseigner le client sur la composition des produits, allergènes, provenance"
+      },
+      {
+        "id": null,
+        "code": "300448",
+        "libelle": "Respecter des règles, des consignes, normes et procédures opérationnelles"
+      },
+      {
+        "id": null,
+        "code": "300446",
+        "libelle": "Respecter les règles de Qualité, Hygiène, Sécurité, Santé et Environnement (QHSSE)"
+      },
+      {
+        "id": null,
+        "code": "119398",
+        "libelle": "Saisir une commande sur informatique"
+      },
+      {
+        "id": null,
+        "code": "403892",
+        "libelle": "S'exprimer avec politesse et courtoisie"
+      },
+      {
+        "id": null,
+        "code": "485638",
+        "libelle": "Veiller à la présentation soignée des plats"
+      }
+    ],
+    "id": null,
+    "identifiantFt": "213CMCQ",
+    "intituleOffre": "Serveur / Serveuse (H/F)",
+    "lieuTravail": "02 - SAINT-QUENTIN",
+    "salaire": "Mensuel de 1900.0 Euros à 1901.0 Euros sur 12.0 mois"
+  }
+]

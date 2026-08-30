@@ -1,5 +1,6 @@
-package com.recherche.offre.ti.configuration;
+package com.recherche.offre.ti.rest;
 
+import com.recherche.offre.ti.configuration.ContexteParent;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;

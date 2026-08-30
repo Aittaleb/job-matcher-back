@@ -1,0 +1,81 @@
+{
+  "id": "212TTQH",
+  "intitule": "Vendeur / Vendeuse (H/F)",
+  "description": "Nous recherchons, pour nos différentes boutiques des Vendeuses/Vendeurs/Responsables de magasin.\n\nVous êtes dynamique, motivé, passionné et professionnel, vous aurez comme fonction au sein de l'équipe :\n\n- L'accueil et la prise en charge du client, la valorisation des produits, la vente additionnelle et la finalisation de la vente,\n\n- Aider à organiser la boutiques pour mettre en valeur les articles ainsi que la réserve,\n\n- Participer au contrôle des produits en réception et aux inventaires ainsi que la tenue du stock.\n\nVous serez l'ambassadeur/ambassadrice de notre marque. Vous contribuez activement au développement du point de vente en accord avec la politique commerciale de l'entreprise.\n\nEnvoyez nous votre CV avec photo + lettre de motivation :",
+  "dateCreation": "2026-08-23T09:30:50.543Z",
+  "dateActualisation": "2026-08-23T09:30:50.893Z",
+  "lieuTravail": {
+    "libelle": "65 - Lourdes",
+    "latitude": 43.091651,
+    "longitude": -0.045898,
+    "codePostal": "65100",
+    "commune": "65286"
+  },
+  "romeCode": "D1245",
+  "romeLibelle": "Vendeur / Vendeuse en parfumerie",
+  "appellationlibelle": "Vendeur / Vendeuse en cosmétique",
+  "entreprise": {
+    "entrepriseAdaptee": false
+  },
+  "typeContrat": "SAI",
+  "typeContratLibelle": "Saisonnier - 2 Mois",
+  "natureContrat": "Contrat travail",
+  "experienceExige": "D",
+  "experienceLibelle": "Débutant accepté",
+  "competences": [
+    {
+      "code": "100341",
+      "libelle": "Procédures d'encaissement",
+      "exigence": "S"
+    },
+    {
+      "code": "102405",
+      "libelle": "Techniques de mise en rayon",
+      "exigence": "S"
+    },
+    {
+      "code": "300375",
+      "libelle": "Organiser, aménager un espace de vente",
+      "exigence": "S"
+    },
+    {
+      "code": "300374",
+      "libelle": "Présenter et valoriser un produit ou un service",
+      "exigence": "S"
+    }
+  ],
+  "salaire": {
+    "libelle": "Horaire de 12.31 Euros à 12.32 Euros sur 12.0 mois",
+    "complement1": "Primes",
+    "listeComplements": [
+      {
+        "code": "1",
+        "libelle": "Primes"
+      }
+    ]
+  },
+  "dureeTravailLibelle": "35H/semaine\nTravail saisonnier",
+  "dureeTravailLibelleConverti": "Temps plein",
+  "alternance": false,
+  "contact": {},
+  "agence": {},
+  "nombrePostes": 1,
+  "qualificationCode": "5",
+  "qualificationLibelle": "Employé non qualifié",
+  "codeNAF": "47.71Z",
+  "secteurActivite": "47",
+  "secteurActiviteLibelle": "Commerce de détail d'habillement en magasin spécialisé",
+  "trancheEffectifEtab": "0 salarié (n'ayant pas d'effectif au 31/12 mais ayant employé des salariés au cours de l'année de référence)",
+  "origineOffre": {
+    "origine": "1",
+    "urlOrigine": "https://candidat.francetravail.fr/offres/recherche/detail/212TTQH"
+  },
+  "offresManqueCandidats": false,
+  "contexteTravail": {
+    "horaires": [
+      "35H/semaine\nTravail saisonnier"
+    ]
+  },
+  "entrepriseAdaptee": false,
+  "employeurHandiEngage": false
+}

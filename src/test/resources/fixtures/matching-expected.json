@@ -1,0 +1,26 @@
+{
+  "competencesManquantes": [
+    {
+      "id": null,
+      "code": "100341",
+      "libelle": "Procédures d'encaissement"
+    },
+    {
+      "id": null,
+      "code": "102405",
+      "libelle": "Techniques de mise en rayon"
+    },
+    {
+      "id": null,
+      "code": "300375",
+      "libelle": "Organiser, aménager un espace de vente"
+    },
+    {
+      "id": null,
+      "code": "300374",
+      "libelle": "Présenter et valoriser un produit ou un service"
+    }
+  ],
+  "competencesTrouvees": [],
+  "score": 0
+}

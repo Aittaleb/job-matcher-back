@@ -1,7 +1,6 @@
 package com.recherche.offre.ti.configuration;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.matching.StringValuePattern;
 import org.apache.hc.core5.http.HttpHeaders;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-
-import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -49,7 +46,6 @@ public abstract class ContexteParent {
             WIRE_MOCK_SERVER.start();
         }
         configureFor("localhost", WIRE_MOCK_SERVER.port());
-
     }
 
     @BeforeEach
@@ -103,20 +99,13 @@ public abstract class ContexteParent {
                         .withBody(readFile("/fixtures/france-travail-offres.json"))));
     }
 
-    protected static void stubForGetWS(final String responsePathFile, final String url) {
-        stubFor(get(urlEqualTo(url)).willReturn(aResponse()
-                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .withBody(readFile(responsePathFile))
-                .withStatus(HttpStatus.OK.value())));
-    }
-
-    protected static void stubForGetWSWithQueryParams(final String responsePathFile, final String url, final Map<String, StringValuePattern> queryParams) {
-        stubFor(get(urlEqualTo(url))
-                .withQueryParams(queryParams)
+    protected static void stubFranceTravailOffreDetails(final String identifiantOffre) {
+        stubFor(get(urlEqualTo("/partenaire/offresdemploi/v2/offres/" + identifiantOffre))
+                .withHeader("Authorization", equalTo("Bearer fake-access-token"))
                 .willReturn(aResponse()
-                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .withBody(readFile(responsePathFile))
-                .withStatus(HttpStatus.OK.value())));
+                        .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                        .withStatus(HttpStatus.OK.value())
+                        .withBody(readFile("/fixtures/offre-details-response.json"))));
     }
 
     @TestConfiguration(proxyBeanMethods = false)
