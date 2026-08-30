@@ -1,0 +1,6 @@
+{
+  "access_token": "fake-access-token",
+  "expires_in": 1499,
+  "token_type": "Bearer",
+  "scope": "api_offresdemploiv2 o2dsoffre nomenclatureRome api_rome-competencesv1"
+}

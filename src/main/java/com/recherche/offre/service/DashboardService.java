@@ -22,7 +22,7 @@ public class DashboardService {
     private final OffreService offreService;
     private final MatchingService matchingService;
 
-    public DashboardDto getDashboard(Long userId) {
+    public DashboardDto getDashboard(final Long userId) {
         final List<RechercheOffreDto> offres = offreService.fetchOffers();
         final List<Integer> listeScores = new ArrayList<>();
         final List<SkillDto> listeCompetencesManquantes = new ArrayList<>();

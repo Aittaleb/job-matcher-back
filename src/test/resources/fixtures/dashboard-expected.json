@@ -1,0 +1,22 @@
+{
+  "competencesADevelopper": [
+    {
+      "id": null,
+      "code": "300282",
+      "libelle": "Entretenir, nettoyer un espace, un lieu, un local"
+    },
+    {
+      "id": null,
+      "code": "101901",
+      "libelle": "Accueillir le client et l'installer"
+    },
+    {
+      "id": null,
+      "code": "117932",
+      "libelle": "Réaliser la mise en place de la salle et de l'office"
+    }
+  ],
+  "matchMoyen": 0,
+  "nombreOffreAnalysees": 130,
+  "nombreOffreFavories": 0
+}
