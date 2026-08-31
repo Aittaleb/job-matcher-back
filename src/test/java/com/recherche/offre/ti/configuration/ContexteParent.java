@@ -1,16 +1,22 @@
 package com.recherche.offre.ti.configuration;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.recherche.offre.conf.AuthTokenCacheConfiguration;
+import com.recherche.offre.conf.RomeCacheConfiguration;
+import org.flywaydb.core.Flyway;
 import org.apache.hc.core5.http.HttpHeaders;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
@@ -45,17 +51,17 @@ public abstract class ContexteParent {
     }
 
     @BeforeEach
-    void resetWireMock() {
+    void resetTestState() {
+        if (!WIRE_MOCK_SERVER.isRunning()) {
+            WIRE_MOCK_SERVER.start();
+        }
+        resetDatabase();
+        clearCaches();
         WIRE_MOCK_SERVER.resetAll();
         configureFor("localhost", WIRE_MOCK_SERVER.port());
         stubFranceTravailAuthToken();
         stubFranceTravailCompetences();
         stubFranceTravailOffres();
-    }
-
-    @AfterAll
-    static void stopWireMock() {
-        WIRE_MOCK_SERVER.stop();
     }
 
     @Autowired
@@ -64,8 +70,42 @@ public abstract class ContexteParent {
     @Autowired
     protected TestRestTemplate testRestTemplate;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    @Qualifier("testFlyway")
+    private Flyway flyway;
+
+    @Autowired
+    @Qualifier(AuthTokenCacheConfiguration.AUTH_TOKEN_CACHE_MANAGER)
+    private CacheManager authTokenCacheManager;
+
+    @Autowired
+    @Qualifier(RomeCacheConfiguration.ROME_CACHE_MANAGER)
+    private CacheManager romeCacheManager;
+
     protected String url(final String path) {
         return "http://localhost:" + environment.getRequiredProperty("local.server.port") + path;
+    }
+
+    private void resetDatabase() {
+        jdbcTemplate.execute("DROP ALL OBJECTS");
+        flyway.migrate();
+    }
+
+    private void clearCaches() {
+        clearCacheManager(authTokenCacheManager);
+        clearCacheManager(romeCacheManager);
+    }
+
+    private void clearCacheManager(final CacheManager cacheManager) {
+        cacheManager.getCacheNames().forEach(cacheName -> {
+            final Cache cache = cacheManager.getCache(cacheName);
+            if (cache != null) {
+                cache.clear();
+            }
+        });
     }
 
     protected static void stubFranceTravailAuthToken() {

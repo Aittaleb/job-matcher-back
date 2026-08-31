@@ -19,6 +19,7 @@ public class DashboardControllerItTest extends ContexteParent {
     @Test
     @SneakyThrows
     void doitChargerLeDashboard() {
+        stubFranceTravailOffreDetails("212TTQH");
         final ResponseEntity<String> response = testRestTemplate.getForEntity(
                 url("/api/dashboard/user/1"),
                 String.class

@@ -36,7 +36,7 @@ public class OffreControllerItTest extends ContexteParent {
     @Test
     @SneakyThrows
     void doitChargerLeDetailDeLOffreParSonIdentifiant() {
-        final String idOffre = "213BNDT";
+        final String idOffre = "212TTQH";
         stubFranceTravailOffreDetails(idOffre);
 
         final var response = testRestTemplate.getForEntity(
