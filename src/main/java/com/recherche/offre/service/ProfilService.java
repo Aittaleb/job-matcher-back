@@ -66,30 +66,51 @@ public class ProfilService {
             return;
         }
 
+        // 1) Charge le referentiel une seule fois pour valider toutes les competences.
         final Set<String> codesReferentiel = chargerCodesReferentiel();
-
         final List<UserSkillEntity> competencesActuelles = userSkillRepository.findAllByIdUserId(userEntity.getId());
-        final Set<Long> competencesActuellesIds = competencesActuelles.stream()
+        final Set<Long> competencesActuellesIds = extraireIdsCompetences(competencesActuelles);
+        final Map<String, SkillDto> competencesSouhaiteesUniques = dedupliquerCompetencesSouhaitees(competences);
+
+        // 2) Ajoute les competences manquantes et construit l'ensemble final desire.
+        final Set<Long> competencesSouhaiteesIds = ajouterCompetencesManquantes(
+            userEntity,
+            competencesSouhaiteesUniques,
+            codesReferentiel,
+            competencesActuellesIds
+        );
+
+        // 3) Supprime les associations qui ne sont plus demandees.
+        supprimerCompetencesObsoletes(competencesActuelles, competencesSouhaiteesIds);
+    }
+
+    private Set<Long> extraireIdsCompetences(final List<UserSkillEntity> competencesActuelles) {
+        return competencesActuelles.stream()
             .map(userSkillEntity -> userSkillEntity.getSkill().getId())
             .collect(Collectors.toSet());
-        final Map<String, SkillDto> competencesSouhaiteesParNom = new LinkedHashMap<>();
+    }
 
+    private Map<String, SkillDto> dedupliquerCompetencesSouhaitees(final List<SkillDto> competences) {
+        final Map<String, SkillDto> competencesSouhaiteesUniques = new LinkedHashMap<>();
         for (final SkillDto competence : competences) {
-            if (competence == null || (competence.getId() == null && (competence.getCode() == null || competence.getCode().isBlank()))) {
+            if (estCompetenceIgnorable(competence)) {
                 continue;
             }
-
-            final String cle = competence.getId() != null
-                ? "ID:" + competence.getId()
-                : "NAME:" + competence.getCode().trim().toLowerCase();
-            competencesSouhaiteesParNom.putIfAbsent(cle, competence);
+            competencesSouhaiteesUniques.putIfAbsent(construireCleCompetence(competence), competence);
         }
+        return competencesSouhaiteesUniques;
+    }
 
-        final Set<Long> competencesSouhaitees = new HashSet<>();
-
-        for (final SkillDto competence : competencesSouhaiteesParNom.values()) {
+    private Set<Long> ajouterCompetencesManquantes(
+        final UserEntity userEntity,
+        final Map<String, SkillDto> competencesSouhaiteesUniques,
+        final Set<String> codesReferentiel,
+        final Set<Long> competencesActuellesIds
+    ) {
+        final Set<Long> competencesSouhaiteesIds = new HashSet<>();
+        for (final SkillDto competence : competencesSouhaiteesUniques.values()) {
             final SkillEntity skillEntity = trouverOuCreerCompetence(competence, codesReferentiel);
-            competencesSouhaitees.add(skillEntity.getId());
+            competencesSouhaiteesIds.add(skillEntity.getId());
 
             if (competencesActuellesIds.add(skillEntity.getId())) {
                 userSkillRepository.save(new UserSkillEntity()
@@ -97,12 +118,25 @@ public class ProfilService {
                     .setSkill(skillEntity));
             }
         }
+        return competencesSouhaiteesIds;
+    }
 
+    private void supprimerCompetencesObsoletes(final List<UserSkillEntity> competencesActuelles, final Set<Long> competencesSouhaiteesIds) {
         for (final UserSkillEntity userSkillEntity : competencesActuelles) {
-            if (!competencesSouhaitees.contains(userSkillEntity.getSkill().getId())) {
+            if (!competencesSouhaiteesIds.contains(userSkillEntity.getSkill().getId())) {
                 userSkillRepository.delete(userSkillEntity);
             }
         }
+    }
+
+    private boolean estCompetenceIgnorable(final SkillDto competence) {
+        return competence == null || (competence.getId() == null && (competence.getCode() == null || competence.getCode().isBlank()));
+    }
+
+    private String construireCleCompetence(final SkillDto competence) {
+        return competence.getId() != null
+            ? "ID:" + competence.getId()
+            : "CODE:" + normaliserCode(competence.getCode());
     }
 
     private SkillEntity trouverOuCreerCompetence(final SkillDto competence, final Set<String> codesReferentiel) {
