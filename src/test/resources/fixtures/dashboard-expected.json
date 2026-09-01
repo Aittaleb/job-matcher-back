@@ -18,5 +18,95 @@
   ],
   "matchMoyen": 0,
   "nombreOffreAnalysees": 130,
-  "nombreOffreFavories": 1
+  "nombreOffreFavories": 1,
+  "offresProposees": [
+    {
+      "codePostal": "21700",
+      "competences": [
+        {
+          "id": null,
+          "code": "101901",
+          "libelle": "Accueillir le client et l'installer"
+        },
+        {
+          "id": null,
+          "code": "300556",
+          "libelle": "Conseiller le client dans ses choix de boissons ou plats selon ses goûts"
+        },
+        {
+          "id": null,
+          "code": "117933",
+          "libelle": "Effectuer le service des plats à table"
+        },
+        {
+          "id": null,
+          "code": "104324",
+          "libelle": "Prendre une commande client"
+        },
+        {
+          "id": null,
+          "code": "117932",
+          "libelle": "Réaliser la mise en place de la salle et de l'office"
+        }
+      ],
+      "id": null,
+      "identifiantFt": "213CMRK",
+      "intituleOffre": "Serveur en extra H/F (H/F)",
+      "lieuTravail": "21 - NUITS ST GEORGES",
+      "salaire": null,
+      "scoreMatching": 0
+    },
+    {
+      "codePostal": "89000",
+      "competences": [
+        {
+          "id": null,
+          "code": "121796",
+          "libelle": "Planification des tâches et gestion des priorités"
+        }
+      ],
+      "id": null,
+      "identifiantFt": "213CMRJ",
+      "intituleOffre": "Adjoint de direction (H/F)",
+      "lieuTravail": "89 - PERRIGNY",
+      "salaire": "Mensuel de 2400.0 Euros à 2800.0 Euros sur 12.0 mois",
+      "scoreMatching": 0
+    },
+    {
+      "codePostal": "83310",
+      "competences": [
+        {
+          "id": null,
+          "code": "124101",
+          "libelle": "Approvisionner un chariot de ménage ou chariot de linge"
+        },
+        {
+          "id": null,
+          "code": "104160",
+          "libelle": "Changer les draps, refaire le lit (mise à blanc, recouche) et remplacer le linge de toilette"
+        },
+        {
+          "id": null,
+          "code": "107356",
+          "libelle": "Désinfecter et décontaminer un équipement"
+        },
+        {
+          "id": null,
+          "code": "300282",
+          "libelle": "Entretenir, nettoyer un espace, un lieu, un local"
+        },
+        {
+          "id": null,
+          "code": null,
+          "libelle": "Expérience dans l'hôtellerie de luxe"
+        }
+      ],
+      "id": null,
+      "identifiantFt": "213CMRF",
+      "intituleOffre": "Femme de chambre/ Valet de chambre (H/F)",
+      "lieuTravail": "83 - GRIMAUD",
+      "salaire": "Mensuel de 2200.0 Euros à 2350.0 Euros sur 12.0 mois",
+      "scoreMatching": 0
+    }
+  ]
 }

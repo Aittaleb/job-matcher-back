@@ -12,4 +12,5 @@ public class DashboardDto {
     private Integer nombreOffreAnalysees;
     private Integer nombreOffreFavories;
     private List<SkillDto> competencesADevelopper;
+    private List<DashboardOffreDto> offresProposees;
 }

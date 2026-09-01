@@ -1,5 +1,6 @@
 package com.recherche.offre.service;
 
+import com.recherche.offre.dto.DashboardOffreDto;
 import com.recherche.offre.dto.DashboardDto;
 import com.recherche.offre.dto.RapportCorrespondanceDto;
 import com.recherche.offre.dto.RechercheOffreDto;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,18 +28,34 @@ public class DashboardService {
         final List<RechercheOffreDto> offres = offreService.fetchOffers();
         final List<Integer> listeScores = new ArrayList<>();
         final List<SkillDto> listeCompetencesManquantes = new ArrayList<>();
+        final List<DashboardOffreDto> offresAvecScore = new ArrayList<>();
         offres.stream().filter(rechercheOffreDto -> !CollectionUtils.isEmpty(rechercheOffreDto.getCompetences())).forEach(offre -> {
             final RapportCorrespondanceDto rapport = matchingService.calculerRapportCorrespondancePourUneOffreDonneeEtIdUtilisateur(userId, offre);
             listeScores.add(rapport.getScore());
-            listeCompetencesManquantes.addAll(rapport.getCompetencesManquantes());
+            if (!CollectionUtils.isEmpty(rapport.getCompetencesManquantes())) {
+                listeCompetencesManquantes.addAll(rapport.getCompetencesManquantes());
+            }
+            offresAvecScore.add(mapToDashboardOffreDto(offre, rapport.getScore()));
         });
 
         // calcul du score moyen
-        final Integer scoreMoyen = listeScores.stream().mapToInt(Integer::intValue).sum() / listeScores.size();
+        final Integer scoreMoyen = CollectionUtils.isEmpty(listeScores) ? 0 : listeScores.stream().mapToInt(Integer::intValue).sum() / listeScores.size();
         final Integer nombreOffresAnalysees = listeScores.size();
 
+        final List<SkillDto> top3CompetencesADevelopper = getTop3CompetencesADevelopper(listeCompetencesManquantes);
+        final List<DashboardOffreDto> top3OffresProposees = getTop3OffresProposees(offresAvecScore);
+
+        return new DashboardDto()
+                .setMatchMoyen(scoreMoyen)
+                .setNombreOffreAnalysees(nombreOffresAnalysees)
+                .setNombreOffreFavories(offreService.fetchFavoriteOffers(userId).size())
+                .setCompetencesADevelopper(top3CompetencesADevelopper)
+                .setOffresProposees(top3OffresProposees);
+    }
+
+    private List<SkillDto> getTop3CompetencesADevelopper(final List<SkillDto> listeCompetencesManquantes) {
         // top 3 des compétences les plus réccurentes à développer
-        final List<SkillDto> topCompetences = listeCompetencesManquantes.stream()
+        return listeCompetencesManquantes.stream()
                 .filter(skillDto -> StringUtils.isNotBlank(skillDto.getCode()))
                 .collect(groupingBy(SkillDto::getCode, counting()))
                 .entrySet().stream()
@@ -46,11 +64,25 @@ public class DashboardService {
                 .map(e -> listeCompetencesManquantes.stream().filter(s -> StringUtils.isNotBlank(s.getCode()) && s.getCode().equals(e.getKey())).findFirst().orElse(null))
                 .filter(Objects::nonNull)
                 .toList();
+    }
 
-        return new DashboardDto()
-                .setMatchMoyen(scoreMoyen)
-                .setNombreOffreAnalysees(nombreOffresAnalysees)
-                .setNombreOffreFavories(offreService.fetchFavoriteOffers(userId).size())
-                .setCompetencesADevelopper(topCompetences);
+    private List<DashboardOffreDto> getTop3OffresProposees(final List<DashboardOffreDto> offresAvecScore) {
+        return offresAvecScore.stream()
+                .sorted(Comparator.comparing(DashboardOffreDto::getScoreMatching, Comparator.nullsLast(Integer::compareTo)).reversed())
+                .limit(3)
+                .toList();
+    }
+
+    private DashboardOffreDto mapToDashboardOffreDto(final RechercheOffreDto offre, final Integer scoreMatching) {
+        final DashboardOffreDto dashboardOffreDto = new DashboardOffreDto();
+        dashboardOffreDto.setScoreMatching(scoreMatching);
+        dashboardOffreDto.setId(offre.getId());
+        dashboardOffreDto.setIdentifiantFt(offre.getIdentifiantFt());
+        dashboardOffreDto.setIntituleOffre(offre.getIntituleOffre());
+        dashboardOffreDto.setLieuTravail(offre.getLieuTravail());
+        dashboardOffreDto.setCodePostal(offre.getCodePostal());
+        dashboardOffreDto.setSalaire(offre.getSalaire());
+        dashboardOffreDto.setCompetences(offre.getCompetences());
+        return dashboardOffreDto;
     }
 }

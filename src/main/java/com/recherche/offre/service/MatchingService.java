@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -31,8 +32,8 @@ public class MatchingService {
         if (profil == null || offre == null || CollectionUtils.isEmpty(profil.getCompetences()) || CollectionUtils.isEmpty(offre.getCompetences())) {
             return new RapportCorrespondanceDto()
                     .setScore(0)
-                    .setCompetencesTrouvees(List.of())
-                    .setCompetencesManquantes(List.of());
+                    .setCompetencesTrouvees(Collections.emptyList())
+                    .setCompetencesManquantes(Collections.emptyList());
         }
 
         final List<SkillDto> profilCompetences = profil.getCompetences();
@@ -46,7 +47,7 @@ public class MatchingService {
                         .noneMatch(profilCompetence -> profilCompetence.getCode().equals(offreCompetence.getCode())))
                 .toList();
 
-        final int score = competencesTrouvees.size() * 100 / (competencesTrouvees.size() + competencesManquantes.size());
+        final int score = competencesTrouvees.size() * 100 / offre.getCompetences().size();
 
         return new RapportCorrespondanceDto()
                 .setScore(score)
